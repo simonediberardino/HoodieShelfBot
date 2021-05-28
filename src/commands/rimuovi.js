@@ -3,7 +3,7 @@ const config = require("../../config.json");
 const {db} = require("../../index");
 
 const usage = {
-    usage: "/aggiungi <ID>",
+    usage: "/rimuov <ID>",
     args: 1
 }
 
@@ -22,14 +22,15 @@ const func = (context, args) => {
                 return utils.printError("Il prodotto è inesistente o è già stato venduto.", context);
 
             db.get("SELECT * FROM carrello WHERE productId = ? AND userId = ?", [productId, userId], (err, exists) => {
-                if(exists)
-                    return utils.printError("Il prodotto è già presente nel tuo carrello.", context);
+                if(!exists)
+                    return utils.printError("Il prodotto non è presente nel tuo carrello.", context);
                 
-                db.run("INSERT INTO carrello(productId, userId) VALUES(?, ?)", [productId, userId], (err, row) => {
+                db.run("DELETE FROM carrello WHERE productId = ? AND userId = ?", [productId, userId], (err, row) => {
+                    console.log(err)
                     if(err)
                         utils.unknownError(context);
                     else
-                        utils.printEmbed("📚 AGGIUNTO! ✔️", "Il prodotto è stato aggiunto al carrello con successo! (/carrello)", context);
+                        utils.printEmbed("📚 RIMOSSO! ✔️", "Il prodotto è stato rimosso al carrello con successo! (/carrello)", context);
                 });
             });
         });

@@ -44,7 +44,7 @@ const func = (context, args) => {
 
 const getRecensioni = (id, callback) => {
     db.all("SELECT stelle FROM recensioni WHERE userId = ?", [id], (err, row) => {
-        if(!row) return callback(0, 0);
+        if(row.length == 0) return callback(0, 0);
         const media = Math.trunc(row.reduce((a, b) => a.stelle + b.stelle) / row.length);
         callback(row.length, media);
     });

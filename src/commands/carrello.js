@@ -22,7 +22,7 @@ const func = (context) => {
 
             for(el of row){
                 const row = await getProdottoById(el.productId);
-                body = utils.addField(body, row.titolo + " ("+row.codiceVolume+"): "+row.stato);
+                body = utils.addField(body, row.titolo + " ("+row.codiceVolume+"): "+row.costo+"€ ("+row.stato+")");
             }
 
             utils.printEmbed(title, body, context);

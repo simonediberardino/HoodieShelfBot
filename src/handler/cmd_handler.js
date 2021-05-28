@@ -13,8 +13,9 @@ module.exports = () => {
             const commandName = file.split(".")[0];
 
             bot.command(commandName, (context) => {
-                const args = context.message.text.trim().split(" ");
+                let args = context.message.text.trim().split(" ");
                 args.shift();
+                args = args.map(e => e.replace(/</g, "").replace(/>/g, ""));
 
                 if(args.length < command.usage.args)
                     utils.printUsage(command.usage, context);

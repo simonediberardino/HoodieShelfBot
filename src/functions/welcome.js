@@ -13,7 +13,7 @@ Ricorda che per usare la maggior parte delle funzionalità è necessario collega
 ▪ /carrello: Mostra i prodotti nel tuo carrello;
 ▪ /aggiungi <ID>: Aggiungi un prodotto al tuo carrello;
 ▪ /info: Mostra le informazioni relative al tuo profilo;
-▪ /ricerca <ID/Nome>: Ricerca il prodotto nel database e ne restituisce il relativo link se disponibile;
+▪ /ricerca <ID/Nome>: Ricerca il prodotto nel database, restituendone il relativo ID da usare col comando /aggiungi. Verrà inoltre visualizzato il relativo link della pagina web;
 
 ✔️ CREDITI:
 ▪ Sviluppatori: Daniele Calisti, Simone Di Berardino;
