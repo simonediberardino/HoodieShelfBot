@@ -3,15 +3,15 @@ const config = require("../../config.json");
 const {db} = require("../../index");
 
 const usage = {
-    usage: "/ricerca <ID>",
+    usage: "/ricerca <CODICE_VOLUME>",
     args: 1
 }
 
 const func = (context, args) => {
     const codiceVolume = args[0];
     
-    queryLibro(codiceVolume, (row) => {
-        if(row){
+    db.all("SELECT * FROM prodotti WHERE codiceVolume = ?;", [codiceVolume], (err, row) => {
+        if(row.length > 0){
             const title = "📚 LIBRO TROVATO! ✔️ (/aggiungi)";
             let body = new String();
 
@@ -24,12 +24,6 @@ const func = (context, args) => {
             utils.printError("Il libro non è stato trovato.", context);
         }
     });
-}
-
-const queryLibro = (codiceVolume, callback) => {
-	db.all("SELECT * FROM prodotti WHERE codiceVolume = ?;", [codiceVolume], (err, row) => {
-        return callback(row);
-	});
 }
 
 module.exports = {
